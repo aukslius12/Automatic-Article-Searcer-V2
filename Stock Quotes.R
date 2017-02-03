@@ -1,3 +1,19 @@
+#------- Internet Connectivity Function ------
+
+#library(RCurl)
+
+#A simple output of TRUE/FALSE depending on if there is an internet connectivity.
+#All credits go to user "eyjo" in the stackoverflow.com forums.
+#Source: http://stackoverflow.com/questions/5076593/how-to-determine-if-you-have-an-internet-connection-in-r
+
+havingInternet <- function() {
+  if (class(try(getURL("www.google.com"))) != "try-error") {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
 #------- getQuote() adjusted ---------
 
 #library(quantmod)
@@ -8,6 +24,9 @@
 #Parameters can be adjusted but everything else is useless for my kind of work
 #although it's not that hard so i might do it if someone asks.
 getQuote0 <- function (tickers) {
+  while (havingInternet() == F){
+    Sys.sleep(1)
+  }
   quotes <- data.frame(as.character(), as.character())
   colnames(quotes) <-
     c(as.character("Trade Time"), as.character("Last"))
