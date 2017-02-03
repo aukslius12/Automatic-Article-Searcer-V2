@@ -21,14 +21,16 @@ def quotesMatching (article, quotes, toffset = 0):
         resQ = resQ.append(quotes.iloc[ind], ignore_index = True)
     return (resQ)
 
-tickers = os.listdir_path(os.getcwd()[:-11] + '\Data\Articles')
+tickers = os.listdir(os.getcwd()[:-11] + '\Data\Articles')
 dir_path = os.getcwd()[:-11] + '\Data\\'
 
 for tick in tickers:
     article = pd.read_csv(dir_path + 'Articles\\' + tick, encoding = 'ISO-8859-1')
     article = dateCnvFromArticle(article)
+	os.remove(dir_path + 'Articles\\' + tick)
     quotes = pd.read_csv(dir_path + 'Quotes\Quotes' + tick, sep = " ")
     quotes = dateCnvFromQuote(quotes)
+	os.remove(dir_path + 'Quotes\Quotes' + tick)
     matched = quotesMatching(article, quotes)
     matched20 = quotesMatching(article, quotes, toffset = 20)
     matched60 = quotesMatching(article, quotes, toffset = 60)

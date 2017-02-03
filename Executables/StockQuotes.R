@@ -98,7 +98,7 @@ for (i in 1:length(tickers)){
 }
 
 tm <- proc.time()[3]
-while ((proc.time()[3] - tm < 120)){ #This should be set to 23340. (6.5 hours) 
+while ((proc.time()[3] - tm < 23340)){ #This should be set to 23340. (6.5 hours) 
   
   for (i in 1:length(tickers)){
     df <- getQuote0(tickers[i])
