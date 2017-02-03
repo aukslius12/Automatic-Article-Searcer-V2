@@ -21,17 +21,23 @@ def quotesMatching (article, quotes, toffset = 0):
         resQ = resQ.append(quotes.iloc[ind], ignore_index = True)
     return (resQ)
 
-tickers = os.listdir(os.getcwd()[:-11] + '\Data\Articles')
-dir = os.getcwd()[:-11] + '\Data\\'
+tickers = os.listdir_path(os.getcwd()[:-11] + '\Data\Articles')
+dir_path = os.getcwd()[:-11] + '\Data\\'
 
 for tick in tickers:
-    article = pd.read_csv(dir + 'Articles\\' + tick, encoding = 'ISO-8859-1')
+    article = pd.read_csv(dir_path + 'Articles\\' + tick, encoding = 'ISO-8859-1')
     article = dateCnvFromArticle(article)
-    quotes = pd.read_csv(dir + 'Quotes\Quotes' + tick, sep = " ")
+    quotes = pd.read_csv(dir_path + 'Quotes\Quotes' + tick, sep = " ")
     quotes = dateCnvFromQuote(quotes)
     matched = quotesMatching(article, quotes)
     matched20 = quotesMatching(article, quotes, toffset = 20)
     matched60 = quotesMatching(article, quotes, toffset = 60)
     matched120 = quotesMatching(article, quotes, toffset = 120)
     results = pd.concat([article, matched, matched20, matched60, matched120], axis = 1)
-    results.to_csv(dir + 'Results\Results%s' % (tick))
+	try:
+		resultsold = pd.read_csv(dir_path + 'Results\\Results' + tick, encoding = 'ISO-8859-1')
+	except:
+		results.to_csv(dir_path + 'Results\Results%s' % (tick))
+	else:
+		results = pd.concat([results,resultsold], ignore_index = True)
+		results.to_csv(dir_path + 'Results\Results%s' % (tick))
