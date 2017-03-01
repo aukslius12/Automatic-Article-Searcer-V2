@@ -56,5 +56,6 @@ for tick in tickers:
         df = dateCnvTo(df)
         dir_path = os.getcwd()[:-11] + '\Data\Articles\%s.csv' % (tick)
         df.to_csv(dir_path)
+        print (tick + ' Added!')
     time.sleep(10)
 

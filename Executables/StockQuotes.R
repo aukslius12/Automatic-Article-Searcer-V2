@@ -109,10 +109,9 @@ while ((proc.time()[3] - tm < 23340)){ #This should be set to 23340. (6.5 hours)
   
 }
 
-files <- dir(paste(substr(getwd(), 1, nchar(getwd()) -12), '/Data/Articles', sep =''))
-for (fil in files){
-  nam <- substr(fil, 1, nchar(fil) -4)
-  ind <- which(tickers == nam)
+
+for (tick in tickers){
+  ind <- which(tickers == tick)
   df <- dfs[[ind]]
-  write.table(df, paste(substr(getwd(), 1, nchar(getwd()) -12), "/Data/Quotes", "/Quotes", fil, sep = ""))
+  write.table(df, paste(substr(getwd(), 1, nchar(getwd()) -12), "/Data/Quotes", "/Quotes", tick, ".csv", sep = ""))
 }
