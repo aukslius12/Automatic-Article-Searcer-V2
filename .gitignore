@@ -47,3 +47,8 @@ Temporary Items
 .apdisk
 *.Rhistory
 *.Rout
+Executables/.idea/Executables.iml
+Executables/.idea/inspectionProfiles/profiles_settings.xml
+Executables/.idea/modules.xml
+Executables/.idea/workspace.xml
+Executables/.idea/misc.xml

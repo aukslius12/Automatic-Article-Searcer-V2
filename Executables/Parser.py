@@ -39,23 +39,22 @@ def dateCnvTo (dataframe):
     return(dataframe)
 
 #----
-startt = datetime.now(timezone('GMT')).replace(hour = 14, minute = 30, second = 0) #Setting NYSE opening time of 14:30 in GMT
-startt = startt.strftime('%a, %d %b %Y %H:%M:%S %Z', )
-startt = time.strptime(startt, "%a, %d %b %Y %H:%M:%S %Z")
-endd = datetime.now(timezone('GMT')).replace(hour = 21, minute = 0, second = 0)
-endd = endd.strftime('%a, %d %b %Y %H:%M:%S %Z', )
-endd = time.strptime(endd, "%a, %d %b %Y %H:%M:%S %Z")
+start = datetime.now(timezone('GMT')).replace(hour = 1, minute = 30, second = 0) #Setting NYSE opening time of 14:30 in GMT
+start = start.strftime('%a, %d %b %Y %H:%M:%S %Z', )
+start = time.strptime(start, "%a, %d %b %Y %H:%M:%S %Z")
+end = datetime.now(timezone('GMT')).replace(hour = 21, minute = 0, second = 0)
+end = end.strftime('%a, %d %b %Y %H:%M:%S %Z', )
+end = time.strptime(end, "%a, %d %b %Y %H:%M:%S %Z")
 
 for tick in tickers:
     df = getData(rss_url = url[0] + tick + url[1])
     df = dateCnvFrom(df)
-    df = df[df['Dates'] <= endd]
-    df = df[df['Dates'] >= startt]
+    df = df[df['Dates'] <= end]
+    df = df[df['Dates'] >= start]
     df = df.drop_duplicates(subset='Links')
     if df.empty == False :
         df = dateCnvTo(df)
         dir_path = os.getcwd()[:-11] + '\Data\Articles\%s.csv' % (tick)
-        df.to_csv(dir_path)
-        print (tick + ' Added!')
+        df.to_csv(dir_path, index = False, index_label = False)
     time.sleep(10)
 

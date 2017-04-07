@@ -40,7 +40,7 @@ for tick in tickers:
     try:
         resultsold = pd.read_csv(dir_path + 'Results\\Results' + tick, encoding = 'ISO-8859-1')
     except:
-        results.to_csv(dir_path + 'Results\Results%s' % (tick), index = False)
+        results.to_csv(dir_path + 'Results\Results%s' % (tick), index = False, index_label = False)
     else:
         results = pd.concat([results,resultsold], ignore_index = True, axis = 0)
-        results.to_csv(dir_path + 'Results\Results%s' % (tick))
+        results.to_csv(dir_path + 'Results\Results%s' % (tick), index = False, index_label = False)
