@@ -52,3 +52,5 @@ Executables/.idea/inspectionProfiles/profiles_settings.xml
 Executables/.idea/modules.xml
 Executables/.idea/workspace.xml
 Executables/.idea/misc.xml
+*.csv
+*.csv
