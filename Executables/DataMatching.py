@@ -42,5 +42,5 @@ for tick in tickers:
     except:
         results.to_csv(dir_path + 'Results\Results%s' % (tick), index = False, index_label = False)
     else:
-        results = pd.concat([results,resultsold], ignore_index = True, axis = 0)
+        results = pd.concat([resultsold, results], ignore_index = True, axis = 0)
         results.to_csv(dir_path + 'Results\Results%s' % (tick), index = False, index_label = False)

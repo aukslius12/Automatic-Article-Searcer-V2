@@ -104,7 +104,7 @@ while ((proc.time()[3] - tm < 23340)){ #This should be set to 23340. (6.5 hours)
     df <- getQuote0(tickers[i])
     row.names(df) <- 0:(nrow(df) - 1)
     dfs[[i]] <- rbind(dfs[[i]], df)
-    Sys.sleep(2.4)
+    Sys.sleep(slpt)
   }
   
 }
