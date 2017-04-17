@@ -67,9 +67,7 @@ def redirected_urls(df):
     df = df[df['Links'] != 'Failed to open url.']
     return (df)
 
-
-# ----
-start = datetime.now(timezone('GMT')).replace(hour=1, minute=30, second=0)  # Setting NYSE opening time of 14:30 in GMT
+start = datetime.now(timezone('GMT')).replace(hour=14, minute=30, second=0)  # Setting NYSE opening time of 14:30 in GMT
 start = start.strftime('%a, %d %b %Y %H:%M:%S %z', )
 start = time.strptime(start, "%a, %d %b %Y %H:%M:%S %z")
 end = datetime.now(timezone('GMT')).replace(hour=21, minute=0, second=0)
@@ -81,10 +79,10 @@ for tick in tickers:
     df = dateCnvFrom(df)
     df = df[df['Dates'] <= end]
     df = df[df['Dates'] >= start]
-    df = df.drop_duplicates(subset='Links')
+    df = df.drop_duplicates(cols='Links')
     if df.empty == False:
         df = dateCnvTo(df)
         df = redirected_urls(df)
-        dir_path = os.getcwd()[:-11] + '\Data\Articles\%s.csv' % (tick)
+        dir_path = os.getcwd()[:-11] + 'Data/Articles/%s.csv' % (tick)
         df.to_csv(dir_path, index=False, index_label=False)
     time.sleep(1)
