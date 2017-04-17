@@ -1,1 +1,0 @@
-"C:\Users\Jurgis\Documents\R\R-3.3.3\bin\R.exe" CMD BATCH StockQuotes.R
